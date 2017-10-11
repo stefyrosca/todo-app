@@ -1,6 +1,7 @@
 import * as React from 'react'
 import {ToDo} from "../model/todo.model";
 import {ToDoStatus} from "../model/todo-status.model";
+import './style.css'
 
 interface TodoViewProps {
     item: ToDo;
@@ -17,14 +18,15 @@ export class TodoViewComponent extends React.Component<TodoViewProps,TodoViewSta
 
     constructor(props) {
         super(props);
+
     }
 
     render() {
         if (!this.props.item)
             return <div> No item provided! </div>;
         return <div style={{width: '90%', margin: 'auto', display: 'flex', flex: 1}}>
-            <div style={{flex: 1}}>{this.props.item.description}</div>
-            <div style={{flex: 1}}>{this.props.item.status}</div>
+            <div className={'description'}>{this.props.item.description}</div>
+            <div className={'status'}>{this.props.item.status}</div>
             <div style={{flex: 1}}>{
                 <select value={this.props.item.status} onChange={(event)=>this.props.updateStatus(this.props.item.id, ToDoStatus[event.target.value])}>
                     {Object.keys(ToDoStatus).map((status, index) => <option value={status} key={index}>{status}</option>)}

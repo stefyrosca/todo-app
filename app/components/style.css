@@ -1,0 +1,10 @@
+.description {
+    /*background-color: seagreen;*/
+    /*color: darksalmon;*/
+    flex: 1;
+}
+
+.status {
+    /*border: dotted crimson 2px;*/
+    flex: 1;
+}
