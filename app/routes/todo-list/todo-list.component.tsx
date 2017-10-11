@@ -4,7 +4,7 @@ import {ToDoStatus} from "../../model/todo-status.model";
 import {TodoViewComponent} from "../../components/todo-view.component";
 
 interface TodoListProps {
-
+    history: any;
 }
 
 interface TodoListState {
@@ -23,13 +23,15 @@ export class TodoListComponent extends React.Component<TodoListProps, TodoListSt
         }
         this.state = {todos};
         this.updateStatus = this.updateStatus.bind(this);
+        this.redirect = this.redirect.bind(this);
+
     }
 
     render() {
         return <div>
             <h4> To do list </h4>
             {
-                Object.keys(this.state.todos).map(id => <TodoViewComponent key={id} item={this.state.todos[id]} updateStatus={this.updateStatus}/>)
+                Object.keys(this.state.todos).map(id => <TodoViewComponent key={id} item={this.state.todos[id]} updateStatus={this.updateStatus} redirect={this.redirect}/>)
             }
         </div>
     }
@@ -42,5 +44,9 @@ export class TodoListComponent extends React.Component<TodoListProps, TodoListSt
         let newTodos = Object.assign({}, this.state.todos);
         newTodos[id] = newItem;
         this.setState(Object.assign({}, this.state, {todos: newTodos}));
+    }
+
+    redirect(id:string) {
+        this.props.history.push(id);
     }
 }

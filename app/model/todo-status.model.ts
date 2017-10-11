@@ -1,5 +1,5 @@
 export enum ToDoStatus {
-    INITIAL = 'INITIAL',
+    PENDING = 'PENDING',
     IN_PROGRESS = 'IN_PROGRESS',
     DONE = 'DONE'
 }

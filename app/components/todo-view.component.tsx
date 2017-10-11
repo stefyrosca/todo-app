@@ -5,6 +5,7 @@ import {ToDoStatus} from "../model/todo-status.model";
 interface TodoViewProps {
     item: ToDo;
     updateStatus: (id:string, status:ToDoStatus) => void;
+    redirect: (id:string) => void;
 }
 
 interface TodoViewState {
@@ -19,6 +20,8 @@ export class TodoViewComponent extends React.Component<TodoViewProps,TodoViewSta
     }
 
     render() {
+        if (!this.props.item)
+            return <div> No item provided! </div>;
         return <div style={{width: '90%', margin: 'auto', display: 'flex', flex: 1}}>
             <div style={{flex: 1}}>{this.props.item.description}</div>
             <div style={{flex: 1}}>{this.props.item.status}</div>
@@ -26,7 +29,11 @@ export class TodoViewComponent extends React.Component<TodoViewProps,TodoViewSta
                 <select value={this.props.item.status} onChange={(event)=>this.props.updateStatus(this.props.item.id, ToDoStatus[event.target.value])}>
                     {Object.keys(ToDoStatus).map((status, index) => <option value={status} key={index}>{status}</option>)}
                 </select>
-            }</div>
+            }
+            </div>
+            <div>
+                <button  onClick={(event)=>{this.props.redirect(`todo/${this.props.item.id}`)}}>View details</button>
+            </div>
         </div>
     }
 }
