@@ -11,9 +11,11 @@ export class CoreLayoutComponent extends React.Component<any, any> {
         return <div>Main page here
             <nav>
                 <ul>
-                    {routes.map((route, index) => {
-                        return <li key={index}><NavLink to={route.path}>{route.display}</NavLink></li>
-                    })}
+                    {routes
+                        .filter(route => route.shouldDisplay)
+                        .map((route, index) => {
+                            return <li key={index}><NavLink to={route.path}>{route.display}</NavLink></li>
+                        })}
                 </ul>
             </nav>
             {this.props.children}
