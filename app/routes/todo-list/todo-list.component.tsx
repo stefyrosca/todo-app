@@ -1,12 +1,12 @@
 import * as React from 'react'
 import {ToDo} from "../../model/todo.model";
 import {ToDoStatus} from "../../model/todo-status.model";
-import {TodoViewComponent} from "../../components/todo-view.component";
+import {TodoComponent} from "../../components/todo.component";
 import todoService from '../../api/todo.service'
 import {Subject} from "rxjs/Subject";
 import {RouteComponentProps} from "react-router";
 
-interface TodoListProps extends RouteComponentProps<any>{
+interface TodoListProps extends RouteComponentProps<any> {
 }
 
 interface TodoListState {
@@ -27,18 +27,22 @@ export class TodoListComponent extends React.Component<TodoListProps, TodoListSt
         this.subscription = todoService.getAll().subscribe(
             todos => this.setState(Object.assign({}, this.state, {todos})),
             error => console.log(error),
-            () => {});
+            () => {
+            });
     }
 
     render() {
-        return <div>
-            <h4> To do list </h4>
-            {
-                Object.keys(this.state.todos)
-                    .map(id => <TodoViewComponent key={id} item={this.state.todos[id]}
-                                                  updateStatus={this.updateStatus}
-                                                  redirect={this.redirect}/>)
-            }
+        return <div className={"container"}>
+            <h4 className={"page-header"}> To do list </h4>
+            <div>
+                {
+
+                    Object.keys(this.state.todos)
+                        .map(id => <TodoComponent key={id} item={this.state.todos[id]}
+                                                      updateStatus={this.updateStatus}
+                                                      redirect={this.redirect}/>)
+                }
+            </div>
         </div>
     }
 

@@ -8,15 +8,20 @@ export class CoreLayoutComponent extends React.Component<any, any> {
     }
 
     render() {
-        return <div>Main page here
-            <nav>
-                <ul>
-                    {routes
-                        .filter(route => route.shouldDisplay)
-                        .map((route, index) => {
-                            return <li key={index}><NavLink to={route.path}>{route.display}</NavLink></li>
-                        })}
-                </ul>
+        return <div>
+            <nav className="navbar navbar-inverse">
+                <div className="container">
+                    <div className="navbar-header">
+                        <span><NavLink className={"navbar-brand"} to={'/'}>Main page here</NavLink></span>
+                        <ul className={"nav navbar-nav"}>
+                            {routes
+                                .filter(route => route.shouldDisplay)
+                                .map((route, index) => {
+                                    return <li key={index}><NavLink to={route.path}>{route.display}</NavLink></li>
+                                })}
+                        </ul>
+                    </div>
+                </div>
             </nav>
             {this.props.children}
         </div>
