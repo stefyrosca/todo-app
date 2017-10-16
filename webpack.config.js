@@ -24,6 +24,9 @@ module.exports = {
             Popper: ['popper.js', 'default']
         })
     ],
+    node: {
+        Buffer: false
+    },
     module: {
         rules: [
             {
@@ -39,13 +42,16 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                exclude: /node_modules/,
-                use: [{loader: 'style-loader'}, {
-                    loader: 'css-loader',
-                    options: {importLoaders: 1}
-                }, {loader: 'postcss-loader'}
-                ]
+                loader: 'style!css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'
             }
+            // {
+            //     test: /\.css$/,
+            //     exclude: /node_modules/,
+            //     use: ExtractTextPlugin.extract({
+            //         fallback: "style-loader",
+            //         use: "css-loader"
+            //     })
+            // }
         ]
     }
 }

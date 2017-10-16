@@ -5,8 +5,10 @@ import {TodoComponent} from "../../components/todo.component";
 import todoService from '../../api/todo.service'
 import {Subject} from "rxjs/Subject";
 import {RouteComponentProps} from "react-router";
+import {ToDoProps, todoSelector, ToDoState} from "../../reducers/todo-reducer";
+import {connect} from "../../reducers/wrapper.component";
 
-interface TodoListProps extends RouteComponentProps<any> {
+interface TodoListProps extends RouteComponentProps<any>, ToDoProps, ToDoState {
 }
 
 interface TodoListState {
@@ -14,8 +16,6 @@ interface TodoListState {
 }
 
 export class TodoListComponent extends React.Component<TodoListProps, TodoListState> {
-    private subscription: Subject<any>;
-
     constructor(props) {
         super(props);
         this.state = {todos: {}};
@@ -24,11 +24,7 @@ export class TodoListComponent extends React.Component<TodoListProps, TodoListSt
     }
 
     componentWillMount() {
-        this.subscription = todoService.getAll().subscribe(
-            todos => this.setState(Object.assign({}, this.state, {todos})),
-            error => console.log(error),
-            () => {
-            });
+        this.props.ADD_TODO(new ToDo('asdi', 'desc', ToDoStatus.DONE))
     }
 
     render() {
@@ -36,11 +32,9 @@ export class TodoListComponent extends React.Component<TodoListProps, TodoListSt
             <h4 className={"page-header"}> To do list </h4>
             <div>
                 {
-
-                    Object.keys(this.state.todos)
-                        .map(id => <TodoComponent key={id} item={this.state.todos[id]}
-                                                      updateStatus={this.updateStatus}
-                                                      redirect={this.redirect}/>)
+                    this.props.todos.map((todo: ToDo) => <TodoComponent key={todo.id} item={todo}
+                                                                        updateStatus={this.updateStatus}
+                                                                        redirect={this.redirect}/>)
                 }
             </div>
         </div>
@@ -59,7 +53,9 @@ export class TodoListComponent extends React.Component<TodoListProps, TodoListSt
     }
 
     componentWillUnmount() {
-        // dispose
-        this.subscription.unsubscribe();
+        this.props.DELETE_TODO('asdi');
     }
+
 }
+
+export default connect(todoSelector)(TodoListComponent)

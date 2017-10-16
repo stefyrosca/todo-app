@@ -1,15 +1,13 @@
 import * as React from 'react'
 import {ToDo} from "../model/todo.model";
 import {ToDoStatus} from "../model/todo-status.model";
-import ToDoService from '../api/todo.service'
-import {match} from "react-router";
-import './style.css'
+
+// import style from ''
 
 interface TodoViewProps {
     item: ToDo;
     updateStatus: (id: string, status: ToDoStatus) => void;
-    redirect: (id: string) => void;
-    match?: match<any>;
+    redirect?: (id: string) => void;
 }
 
 interface TodoViewState {
@@ -18,19 +16,16 @@ interface TodoViewState {
 
 export class TodoComponent extends React.Component<TodoViewProps, TodoViewState> {
 
-    localItem: ToDo;
-
     constructor(props) {
         super(props);
     }
 
     componentWillMount() {
-        if (!this.props.item && this.props.match)
-            this.localItem = ToDoService.getById(this.props.match.params.id);
+
     }
 
     render() {
-        let item = this.props.item || this.localItem;
+        let item = this.props.item;
         if (!item)
             return <div> No item provided! </div>;
         return <div className="container">
