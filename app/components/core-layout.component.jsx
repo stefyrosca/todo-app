@@ -2,7 +2,7 @@ import * as React from "react";
 import routes from "../routes/index";
 import {Link, NavLink} from "react-router-dom";
 
-export class CoreLayoutComponent extends React.Component<any, any> {
+export class CoreLayoutComponent extends React.Component {
     constructor(props) {
         super(props);
     }

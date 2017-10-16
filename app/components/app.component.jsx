@@ -2,14 +2,9 @@ import * as React from "react";
 import {CoreLayoutComponent} from "./core-layout.component";
 import routes from "../routes/index";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
-import {Store, Action} from "reactive-state";
-import {AppState} from "../reducers/state";
 import {Wrapper} from "../reducers/wrapper.component";
 
-export class AppComponent extends React.Component<{ store: Store<AppState>, actions: Action<any>[] }, any> {
-
-    actions: any;
-
+export class AppComponent extends React.Component {
     constructor(props) {
         super(props);
     }

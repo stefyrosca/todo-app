@@ -1,11 +1,9 @@
 import * as React from 'react'
-import ToDoService from '../../api/todo.service'
-import {ToDo} from "../../model/todo.model";
-import {TodoComponent} from "../../components/todo.component";
+import ToDoService from '../../api/todo.service.js'
+import {ToDo} from "../../model/todo.model.js";
+import {TodoComponent} from "../../components/todo.component.jsx";
 
-export class TodoViewComponent extends React.Component<any, any> {
-    localItem: ToDo;
-
+export class TodoViewComponent extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -20,7 +18,7 @@ export class TodoViewComponent extends React.Component<any, any> {
         if (!item)
             return <div> No item provided! </div>;
         return <div className="container">
-            <TodoComponent item={this.localItem} updateStatus={()=>{}}/>
+            <TodoComponent item={this.localItem}/>
         </div>
     }
 }

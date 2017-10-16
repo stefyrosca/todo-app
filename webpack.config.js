@@ -5,7 +5,7 @@ module.exports = {
     entry: [
         "webpack-dev-server/client?http://localhost:80",
         'webpack/hot/only-dev-server',
-        "./app/index.tsx"
+        "./app/index.jsx"
     ],
     output: {
         filename: "./build/bundle.js"
@@ -13,7 +13,7 @@ module.exports = {
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '.jsx', '.css']
     },
-    devtool: 'inline-source-map',
+    devtool: 'source-map',
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
         new ExtractTextPlugin("[name].css"),
@@ -30,15 +30,13 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.tsx?$/,
+                test: /\.jsx$|js$/,
                 exclude: /node_modules/,
-                use: [{loader: 'react-hot-loader/webpack'}, {loader: 'ts-loader'}]
-            },
-            {
-                test: /\.js$/,
-                exclude: /(node_modules)/,
-                enforce: "pre",
-                loader: "source-map-loader"
+                use: [{loader: 'react-hot-loader/webpack'}, {
+                    loader: 'babel-loader', options: {
+                        presets: ['env']
+                    }
+                }, {loader: "source-map-loader"}]
             },
             {
                 test: /\.css$/,
