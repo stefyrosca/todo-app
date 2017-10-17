@@ -1,9 +1,26 @@
 {
   "presets": [
-    "es2017",
+    "es2015",
     "react"
   ],
   "plugins": [
     "transform-object-rest-spread"
-  ]
+  ],
+  "env": {
+    "development": {
+      "plugins": [
+        "transform-es2015-modules-commonjs"
+      ]
+    },
+    "production": {
+      "plugins": [
+        "transform-es2015-modules-commonjs"
+      ]
+    },
+    "test": {
+      "plugins": [
+        "transform-es2015-modules-commonjs"
+      ]
+    }
+  }
 }

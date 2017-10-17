@@ -24,9 +24,6 @@ module.exports = {
             Popper: ['popper.js', 'default']
         })
     ],
-    node: {
-        Buffer: false
-    },
     module: {
         rules: [
             {

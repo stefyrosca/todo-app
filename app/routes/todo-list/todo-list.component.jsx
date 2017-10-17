@@ -16,7 +16,7 @@ export class TodoListComponent extends React.Component {
     }
 
     componentWillMount() {
-        this.props.ADD_TODO(new ToDo('asdi', 'desc', ToDoStatus.DONE))
+        // this.props.ADD_TODO(new ToDo('asdi', 'desc', ToDoStatus.DONE))
     }
 
     render() {
@@ -30,6 +30,13 @@ export class TodoListComponent extends React.Component {
                     </div>)
                 }
             </div>
+            <div>
+                {this.state.visibleAddItem ? <CreateTodoComponent/> :
+                    <button className="btn btn-sm btn-primary" onClick={this.addNewItem}>
+                        Add new item
+                    </button>
+                }
+            </div>
         </div>
     }
 
@@ -37,6 +44,7 @@ export class TodoListComponent extends React.Component {
         if (this.state.visibleAddItem) {
             console.log('create new')
         } else {
+            console.log('clicked!!')
             this.setState({...this.state, visibleAddItem: true})
         }
     }
@@ -47,7 +55,7 @@ export class TodoListComponent extends React.Component {
     }
 
     componentWillUnmount() {
-        this.props.DELETE_TODO('asdi');
+        // this.props.DELETE_TODO('asdi');
     }
 
 }
